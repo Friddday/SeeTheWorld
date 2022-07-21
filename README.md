@@ -1,4 +1,3 @@
 # See The World
-See The World
 
-自用配置
+### This repository has Deleted!!!
