@@ -1,0 +1,8 @@
+#!name=MITM & HostName
+#!desc=MITM & HostName
+
+
+[MITM]
+hostname = %APPEND% *.wikipedia.org, *.wikiwand.com
+#hostname = %APPEND% *.wikipedia.org, *.wikiwand.com, 
+#biz.caiyunapp.com, 

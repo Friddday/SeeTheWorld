@@ -1,0 +1,76 @@
+#!name= Rules
+#!desc=自定义规则
+
+[Rule]
+# > 如果一个使用域名的请求遇到了一个 IP 类型规则（IP-CIDR/IP-CIDR6/GEOIP）且该规则不带有 no-resolve 选项，那么将触发 DNS 查询。
+# > 将所有非 IP 类规则置于规则的顶部，将 IP 类规则置于尾部，避免并不需要进行本地 DNS 查询的请求产生额外的 DNS 查询。
+# > 屏蔽轮子网站
+DOMAIN-KEYWORD, ntdtv, REJECT
+DOMAIN-KEYWORD, minghui, REJECT
+DOMAIN-KEYWORD, dafahao, REJECT
+DOMAIN-KEYWORD, falundafa, REJECT
+DOMAIN-KEYWORD, epochtimes, REJECT
+DOMAIN-KEYWORD, dongtaiwang, REJECT
+DOMAIN-KEYWORD, wujieliulan, REJECT
+# > 拒绝 YouTube, facebook, instagram 等 443 端口 quic UDP, 使其回退到 http/1.1，http/2
+#AND, ((PROTOCOL, UDP), (DEST-PORT, 443)), REJECT-NO-DROP
+DOMAIN-SUFFIX, emby.misakaf.xyz, 🇭🇰
+DOMAIN-SUFFIX, fapster.xxx, 🇭🇰
+# ------Rulesets (规则集）------
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Speedtest/Speedtest.list, 🪁 𝚂𝚙𝚎𝚎𝚍𝚝𝚎𝚜𝚝
+#RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list, 🎵 𝚂𝚙𝚘𝚝𝚒𝚏𝚢
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTubeMusic/YouTubeMusic.list, 🎹 𝚈𝚘𝚞𝚃𝚞𝚋𝚎𝙼𝚞𝚜𝚒𝚌
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTube/YouTube.list, 📽 𝚈𝚘𝚞𝚃𝚞𝚋𝚎
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMedia/ChinaMedia.list, 📹 𝙲𝚑𝚒𝚗𝚊𝙼𝚎𝚍𝚒𝚊
+#RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/BiliBili/BiliBili.list, 📹 𝙱𝚒𝚕𝚒𝚋𝚒𝚕𝚒
+#RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/myTVSUPER/myTVSUPER.list, 🎬 𝚖𝚢𝚃𝚅𝚂𝚄𝙿𝙴𝚁
+#RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/LineTV/LineTV.list, 🖥 𝙻𝚒𝚗𝚎𝚃𝚅
+#RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/iQIYI/iQIYI.list, 🎬 𝚒𝚀𝚒𝚢𝚒
+#RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list, 📺 𝙽𝚎𝚝𝚏𝚕𝚒𝚡
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list, 🎥 𝚃𝚒𝚔𝚝𝚘𝚔
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GlobalMedia/GlobalMedia.list, 📽 𝙶𝚕𝚘𝚋𝚊𝚕𝙼𝚎𝚍𝚒𝚊
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list, 🏈 𝙶𝚘𝚘𝚐𝚕𝚎
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Microsoft/Microsoft.list, 🏀 𝙼𝚒𝚌𝚛𝚘𝚜𝚘𝚏𝚝
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Twitter/Twitter.list, 📟 𝚃𝚆𝚒𝚝𝚝𝚎𝚛
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PayPal/PayPal.list, 💰 𝙿𝚊𝚢𝚙𝚊𝚕
+# > Telegram 方案一
+#RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Telegram/Telegram.list, 📲 𝚃𝚎𝚕𝚎𝚐𝚛𝚊𝚖
+# > Telegram 方案二
+#IP-ASN, 59930, 🇺🇸, no-resolve // DC1
+#IP-ASN, 62014, 🇸🇬, no-resolve // DC5
+#IP-ASN, 62041, 🇬🇧, no-resolve // DC4
+# > Telegram 方案三
+# > sb tg
+IP-CIDR, 0.0.0.0/32, REJECT-TINYGIF, no-resolve
+IP-CIDR, 2.0.0.0/32, REJECT-TINYGIF, no-resolve
+OR, ((IP-ASN,44097,no-resolve), (IP-ASN,59930,no-resolve), (IP-ASN,62014,no-resolve), (IP-ASN,62041,no-resolve), (IP-ASN,211157,no-resolve)), 📲 𝚃𝚎𝚕𝚎𝚐𝚛𝚊𝚖
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Global/Global.list, 🐳
+DOMAIN-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Global/Global_Domain.list, 🐳
+#DOMAIN-SUFFIX, cl2-cn.apple.com, REJECT-DROP
+#DOMAIN-SUFFIX, cl4-cn.apple.com, REJECT-DROP
+#DOMAIN-SUFFIX, cl5.apple.com, REJECT-DROP
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple.list, 🍎 𝙰𝚙𝚙𝚕𝚎
+# RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/NetEaseMusic/NetEaseMusic.list, 🎸 𝙽𝚎𝚝𝙴𝚊𝚜𝚎𝙼𝚞𝚜𝚒𝚌
+# > Local Area Network 局域网
+RULE-SET, https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list, 🏓
+# > 垃圾麻花腾
+DOMAIN-SUFFIX, wspeed.qq.com, REJECT-TINYGIF
+# > 解决微信有时不联网
+IP-CIDR, 182.254.116.0/24, 🏓, no-resolve
+# > QQ垃圾空链接
+IP-CIDR, 36.110.144.18/32, REJECT-TINYGIF, no-resolve
+IP-CIDR, 39.165.89.140/32, REJECT-TINYGIF, no-resolve
+IP-CIDR, 183.61.49.155/32, REJECT-TINYGIF, no-resolve
+IP-CIDR, 59.36.121.252/32, REJECT-TINYGIF, no-resolve
+# > bilibili gRPC
+IP-CIDR, 203.107.1.1/24, REJECT, no-resolve
+# > 强制 IPv6 回退 IPv4
+# > IP-CIDR6, ::/0, REJECT, no-resolve
+IP-CIDR6, 2408:80f1:21:bb::23/64, REJECT-TINYGIF, no-resolve
+IP-CIDR6, 2408:870c:3010:21::/64, REJECT-TINYGIF, no-resolve
+IP-CIDR6, 2408:870c:3010:22::/64, REJECT-TINYGIF, no-resolve
+IP-CIDR6, 2408:870c:3010:26::/64, REJECT-TINYGIF, no-resolve
+IP-CIDR6, 2408:870c:3010:28::/64, REJECT-TINYGIF, no-resolve
+
+
+
