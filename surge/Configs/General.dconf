@@ -1,3 +1,5 @@
+#!MANAGED-CONFIG https://raw.githubusercontent.com/Friddday/SeeTheWorld/main/surge/Configs/General.dconf interval=43200 strict=true
+
 [General]
 # > ***********************************通用设置*************************************************
 # > DNS 服务器 (如无必要不建议使用 DNS over HTTPS)
